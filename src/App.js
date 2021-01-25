@@ -1,5 +1,6 @@
 import './App.css';
 import Page from './components/Page';
+import userData from './datasets/ivis.json';
 
 const App = (props) => {
   return (
@@ -9,7 +10,7 @@ const App = (props) => {
         <h5>A D3-based tool for Information Visualization group formation</h5>
       </header>
       <div className="App-body">
-        <Page />
+        <Page userData={userData}/>
       </div>
       <div className="App-footer">
           By <a href="https://github.com/guceda">Gonzalo Uceda</a> & <a href="https://github.com/dvcarrillo">David Vargas</a> for DH2321
