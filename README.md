@@ -1,4 +1,4 @@
-# ivis-group-selection
+# IVIS Group Selection
 An interactive visualization to select a group for the IVIS subject
 
 # Getting Started with Create React App
