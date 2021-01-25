@@ -11,6 +11,7 @@ const heatmapBuilder = (dataset, containerEl) => {
   height = 450 - margin.top - margin.bottom;
 
   const selected = [];
+  const colors = ['red', 'green', 'yellow'];
 
   // append the svg object to the body of the page
   const svg = d3.select(containerEl)
@@ -50,6 +51,7 @@ const heatmapBuilder = (dataset, containerEl) => {
     .select(".domain").remove()
 
   // Build color scale
+  //const myColor = d3.scaleOrdinal().range(colors);
   const myColor = d3.scaleSequential()
     .interpolator(d3.interpolateInferno)
     .domain([1,100])
