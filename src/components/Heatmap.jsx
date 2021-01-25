@@ -9,7 +9,6 @@ const HeatMap = (props) => {
 
   useLayoutEffect(() => {
     if (containerRef?.current) {
-      debugger;
       const children = d3.select(containerRef?.current).selectAll('svg');
       if (children.size() !== 0) {
         d3.select(containerRef?.current).selectAll('svg').remove();
