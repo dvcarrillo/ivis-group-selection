@@ -23,7 +23,7 @@ const heatmapBuilder = (dataset, containerEl) => {
         "translate(" + margin.left + "," + margin.top + ")");
 
   //Read the data
-  d3.csv("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/heatmap_data.csv", function(data) {
+  d3.csv("https://raw.githubusercontent.com/dvcarrillo/ivis-group-selection/dev/src/datasets/ivis.csv", function(data) {
 
   // Labels of row and columns -> unique identifier of the column called 'group' and 'variable'
   const myGroups = d3.map(data, function(d){return d.group;}).keys()
