@@ -49,3 +49,8 @@ a {
 text {
   fill: white;
 }
+
+.MuiDataGrid-cell, .MuiDataGrid-colCellTitle, .MuiDataGrid-footer, .MuiToolbar-root, .MuiToolbar-regular, .MuiTablePagination-toolbar, .MuiToolbar-gutters, .MuiSvgIcon-root, .MuiSelect-icon, .MuiTablePagination-selectIcon {
+  color: white!important;
+  fill: white;
+}
