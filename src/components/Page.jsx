@@ -5,9 +5,9 @@ import List from './List';
 const Page = (props) => {
   return (
     <>
-    <OtherChart/>
-     <Heatmap/>
-      <List/>
+      <OtherChart />
+      <Heatmap />
+      <List />
     </>
   );
 }

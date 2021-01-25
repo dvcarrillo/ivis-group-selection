@@ -145,7 +145,7 @@ const HeatMap = (props) => {
     .attr("text-anchor", "left")
     .style("font-size", "22px")
      .style("fill", "white")
-    .text("IVIS group formation tool");
+    .text("Students' skills");
 
     // Add subtitle to graph
     svg.append("text")
@@ -155,7 +155,7 @@ const HeatMap = (props) => {
     .style("font-size", "14px")
     .style("fill", "white")
     .style("max-width", 400)
-    .text("A D3 graph for group formation");
+    .text("Select one cell to see more students with similar ratings");
 
   },[]);
 
