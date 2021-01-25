@@ -13,7 +13,7 @@ const HeatMap = (props) => {
       if (children.size() !== 0) {
         d3.select(containerRef?.current).selectAll('svg').remove();
       }
-      drawChart(null, containerRef.current);
+      drawChart(props.userData, containerRef.current);
     }
   }, [drawChart]);
 
