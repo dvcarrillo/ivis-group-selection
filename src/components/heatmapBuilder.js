@@ -114,9 +114,8 @@ const heatmapBuilder = (data0, containerEl, setFilteredData) => {
     isSelected ? selected.splice(idx) : selected.push(d);
     d3.selectAll(`.${rep(d.variable)}`).filter(`.${rep(d.group)}`).select('rect')
       .style("stroke", isSelected ? "none" : "black");
-    debugger;
-    console.log(data0);
-    setFilteredData(selected.map(x => data0.find(data => data.User === x.group)));
+    const data = selected.map(x => data0.find(data => data.User === x.group));
+    setFilteredData(data.length > 0 ? data : data0);
   }
 
   // add the squares

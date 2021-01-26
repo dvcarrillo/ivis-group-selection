@@ -17,7 +17,7 @@ const List = (props) => {
   const rows = props.userData.map((value, id) => ({ ...value, id }));
 
   const classes = useStyles();
-  debugger;
+  
   return (
     <div className={classes.table}>
       <DataGrid rows={rows} columns={columns} />
