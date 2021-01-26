@@ -3,27 +3,10 @@ import * as d3 from 'd3';
  * Base code retrieved from https://www.d3-graph-gallery.com/graph/heatmap_style.html 
 */
 
-
-const heatmapBuilder = (data0, containerEl) => {
-  // set the dimensions and margins of the graph
-  const margin = { top: 80, right: 25, bottom: 250, left: 250 },
-    width = 450 * 3 - margin.left - margin.right,
-    height = 650 - margin.top - margin.bottom;
-
-  const selected = [];
-
-  // append the svg object to the body of the page
-  const svg = d3.select(containerEl)
-    .append("svg")
-    .attr("width", width + margin.left + margin.right)
-    .attr("height", height + margin.top + margin.bottom)
-    .append("g")
-    .attr("transform",
-      "translate(" + margin.left + "," + margin.top + ")");
-
+const formatData = (data0) => {
   //Read the data
-  let data = [];
-  let columns = Object.keys(data0[0]);
+  const data = [];
+  const columns = Object.keys(data0[0]);
 
   // Main matrix
   for (let i = 0; i < data0.length; i++) {
@@ -35,6 +18,27 @@ const heatmapBuilder = (data0, containerEl) => {
       });
     }
   }
+  return data;
+}
+
+
+const heatmapBuilder = (data0, containerEl) => {
+  // set the dimensions and margins of the graph
+  const margin = { top: 80, right: 25, bottom: 250, left: 250 },
+    width = 450 * 3 - margin.left - margin.right,
+    height = 650 - margin.top - margin.bottom;
+
+  const selected = [];
+  const data = formatData(data0);
+
+  // append the svg object to the body of the page
+  const svg = d3.select(containerEl)
+    .append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+    .append("g")
+    .attr("transform",
+      "translate(" + margin.left + "," + margin.top + ")");
 
   // Labels of row and columns -> unique identifier of the column called 'group' and 'variable'
   const myGroups = d3.map(data, function (d) { return d.group; }).keys()
