@@ -47,6 +47,7 @@
   justify-content: space-between;
   align-items: flex-end;
   margin: 20px 0 20px 0;
+  width: 82.5%;
 }
 
 .titleBox {
@@ -67,7 +68,7 @@
   background-color: #21242c;
   border-radius: 5px;
   padding: 10px 20px;
-  margin-left: 80px;
+  /* margin-left: 7vw; */
 }
 
 .keyLegend {
