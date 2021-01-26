@@ -25,7 +25,7 @@ const heatmapBuilder = (data0, containerEl, setFilteredData) => {
   // set the dimensions and margins of the graph
   const margin = { top: 80, right: 25, bottom: 100, left: 110 },
     width = 450 * 3 - margin.left - margin.right,
-    height = 650 - margin.top - margin.bottom;
+    height = 500 - margin.top - margin.bottom;
 
   const selected = [];
   const data = formatData(data0);
