@@ -6,12 +6,11 @@ import * as d3 from 'd3';
 
 const heatmapBuilder = (data0, containerEl) => {
   // set the dimensions and margins of the graph
-  const margin = { top: 80, right: 25, bottom: 30, left: 40 },
+  const margin = { top: 80, right: 25, bottom: 250, left: 250 },
     width = 450 * 3 - margin.left - margin.right,
-    height = 450 - margin.top - margin.bottom;
+    height = 650 - margin.top - margin.bottom;
 
   const selected = [];
-  const colors = ['red', 'yellow', 'green'];
 
   // append the svg object to the body of the page
   const svg = d3.select(containerEl)
@@ -44,19 +43,26 @@ const heatmapBuilder = (data0, containerEl) => {
   // Build X scales and axis:
   const x = d3.scaleBand()
     .range([0, width])
-    .domain(myGroups)
-  // .padding(0.05);
+    .domain(myGroups);
+
+  // Append axis legend
   svg.append("g")
     .style("font-size", 15)
+    .attr("transform", "translate(0," + height + ")")
     .attr("transform", "translate(0," + height + ")")
     .call(d3.axisBottom(x).tickSize(0))
     .select(".domain").remove()
 
+  //Rotate axis values
+  svg.selectAll('text').attr('transform', 'rotate(-45)')
+  .attr("text-anchor", 'end')
+
   // Build Y scales and axis:
   const y = d3.scaleBand()
     .range([height, 0])
-    .domain(myVars)
-  // .padding(0.05);
+    .domain(myVars);
+
+  // Append axis legend
   svg.append("g")
     .style("font-size", 15)
     .call(d3.axisLeft(y).tickSize(0))
@@ -64,7 +70,8 @@ const heatmapBuilder = (data0, containerEl) => {
 
   // Build color scale
   const myColor = (value) => {
-    let colorValues = ['#0A2F51',
+    let colorValues = [
+      '#0A2F51',
       '#0E4D64',
       '#137177',
       '#188977',
@@ -74,24 +81,11 @@ const heatmapBuilder = (data0, containerEl) => {
       '#74C67A',
       '#99D492',
       '#BFE1B0',
-      '#DEEDCF'];
+      '#DEEDCF'
+    ];
 
-    return colorValues[10 - value];
+    return colorValues[colorValues.length - 1 -  value];
   }
-  // const myColor = d3.scaleSequential()
-  //   .interpolator(d3.interpolateInferno)
-  //   .domain([1, 100])
-
-  // create a tooltip
-  const tooltip = d3.select("#my_dataviz")
-    .append("div")
-    .style("opacity", 0)
-    .attr("class", "tooltip")
-    .style("background-color", "white")
-    .style("border", "solid")
-    .style("border-width", "2px")
-    .style("border-radius", "5px")
-    .style("padding", "5px")
 
   // Three function that change the tooltip when user hover / move / leave a cell
   const mouseover = function (d) {
@@ -100,22 +94,12 @@ const heatmapBuilder = (data0, containerEl) => {
     svg.selectAll(`.${d.group.replace(' ', '_')}`).selectAll('rect').style('opacity', 0.8);
     svg.selectAll(`.${d.group.replace(' ', '_')}`).selectAll('text').style('opacity', 0.8);
     d3.select(this).style('opacity', 1);
-    // tooltip
-    //   .style("opacity", 1)
-    // d3.select(this)
-    //   .style("opacity", 1)
   }
-  const mousemove = function (d) {
-    tooltip
-      .html("The exact value of<br>this cell is: " + d.value)
-      .style("left", (d3.mouse(this)[0] + 70) + "px")
-      .style("top", (d3.mouse(this)[1]) + "px")
-  }
+  const mousemove = function (d) {}
 
   const mouseleave = function (d) {
     svg.selectAll('rect').style('opacity', 0.8);
     svg.selectAll(`.${d.group.replace(' ', '_')}`).selectAll('text').style('opacity', 0);
-    tooltip.style("opacity", 0);
     d3.select(this).style("opacity", 0.8);
   }
 
