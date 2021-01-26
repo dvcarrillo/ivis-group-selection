@@ -4,7 +4,7 @@
 
 .App-header {
   background-color: #21242c;
-  /* min-height: 30vh; */
+  height: 100px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -42,10 +42,68 @@
   padding: 30px 50px;
 }
 
+.heatmapHead {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin: 20px 0 20px 0;
+}
+
+.titleBox {
+  font-size: 0.8rem;
+  text-align: left;
+}
+
+.titleBox h1, h3 {
+  margin: 7px;
+}
+
+.titleBox h3 {
+  font-weight: 400;
+}
+
+.keyBox {
+  width: 200px;
+  background-color: #21242c;
+  border-radius: 5px;
+  padding: 10px 20px;
+  margin-left: 80px;
+}
+
+.keyLegend {
+  display: flex;
+  justify-content: space-between;
+}
+
+.keyColor {
+  width: 100%;
+  height: 20px;
+  background: linear-gradient(90deg, rgba(240,255,248,1) 0%, rgba(0,69,38,1) 100%);
+  margin: 10px 0;
+  border-radius: 5px;
+}
+
+.keyBox h5 {
+  width: 100%;
+  font-size: 1rem;
+  margin: 0;
+  text-align: left;
+}
+
+.keyLegend p {
+  font-size: 0.8rem;
+  margin: 0;
+}
+
 a {
   color: #61dafb;
 }
 
 text {
+  fill: white;
+}
+
+.MuiDataGrid-cell, .MuiDataGrid-colCellTitle, .MuiDataGrid-footer, .MuiToolbar-root, .MuiToolbar-regular, .MuiTablePagination-toolbar, .MuiToolbar-gutters, .MuiSvgIcon-root, .MuiSelect-icon, .MuiTablePagination-selectIcon {
+  color: white!important;
   fill: white;
 }

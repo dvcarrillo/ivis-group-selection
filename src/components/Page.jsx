@@ -1,11 +1,13 @@
 import Heatmap from './Heatmap';
 import List from './List';
+import React, { useState } from 'react';
 
 const Page = (props) => {
+  const [filteredData, setFilteredData] = useState(props.userData);
   return (
     <>
-      <Heatmap userData={props.userData}/>
-      <List userData={props.userData}/>
+      <Heatmap setFilteredData={setFilteredData} userData={props.userData}/>
+      <List userData={filteredData}/>
     </>
   );
 }
