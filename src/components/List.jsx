@@ -3,12 +3,13 @@ import { DataGrid } from '@material-ui/data-grid';
 
 const useStyles = makeStyles({
   table: {
-    minWidth: 700,
+    minWidth: '700px',
     backgroundColor: '#21242c',
     color: 'white!important',
-    height: 400, 
-    width: '100%',
-    marginTop: '50px'
+    height: '400px', 
+    width: '1300px',
+    marginTop: '50px',
+    marginLeft: '10px'
   },
 });
 
