@@ -44,6 +44,8 @@ const heatmapBuilder = (data0, containerEl) => {
   const myGroups = d3.map(data, function (d) { return d.group; }).keys()
   const myVars = d3.map(data, function (d) { return d.variable; }).keys()
 
+  const rep = d => d.replaceAll(' ', '_');
+
   // Build X scales and axis:
   const x = d3.scaleBand()
     .range([0, width])
@@ -94,16 +96,16 @@ const heatmapBuilder = (data0, containerEl) => {
   // Three function that change the tooltip when user hover / move / leave a cell
   const mouseover = function (d) {
     svg.selectAll('rect').style('opacity', 0.3);
-    svg.selectAll(`.${d.variable.replaceAll(' ', '_')}`).selectAll('rect').style('opacity', 0.55);
-    svg.selectAll(`.${d.group.replaceAll(' ', '_')}`).selectAll('rect').style('opacity', 0.8);
-    svg.selectAll(`.${d.group.replaceAll(' ', '_')}`).selectAll('text').style('opacity', 0.8);
+    svg.selectAll(`.${rep(d.variable)}`).selectAll('rect').style('opacity', 0.55);
+    svg.selectAll(`.${rep(d.group)}`).selectAll('rect').style('opacity', 0.8);
+    svg.selectAll(`.${rep(d.group)}`).selectAll('text').style('opacity', 0.8);
     d3.select(this).style('opacity', 1);
   }
   const mousemove = function (d) {}
 
   const mouseleave = function (d) {
     svg.selectAll('rect').style('opacity', 0.8);
-    svg.selectAll(`.${d.group.replaceAll(' ', '_')}`).selectAll('text').style('opacity', 0);
+    svg.selectAll(`.${rep(d.group)}`).selectAll('text').style('opacity', 0);
     d3.select(this).style("opacity", 0.8);
   }
 
@@ -112,7 +114,7 @@ const heatmapBuilder = (data0, containerEl) => {
     const isSelected = idx > -1;
     isSelected ? selected.splice(idx) : selected.push(d);
     debugger; 
-    d3.selectAll(`.${d.variable.replaceAll(' ', '_')}`).filter(`.${d.group.replaceAll(' ', '_')}`).select('rect')
+    d3.selectAll(`.${rep(d.variable)}`).filter(`.${rep(d.group)}`).select('rect')
       .style("stroke", isSelected ? "none" : "black");
 
   }
@@ -122,7 +124,7 @@ const heatmapBuilder = (data0, containerEl) => {
     .data(data, function (d) { return d.group + ':' + d.variable; })
     .enter()
     .append("g")
-    .attr('class', (d) => `${d.variable.replaceAll(' ', '_')} ${d.group.replaceAll(' ', '_')}`)
+    .attr('class', (d) => `${rep(d.variable)} ${rep(d.group)}`)
     .on("click", click)
     .on("mouseover", mouseover)
     .on("mousemove", mousemove)
