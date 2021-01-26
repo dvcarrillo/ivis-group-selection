@@ -24,7 +24,7 @@ const formatData = (data0) => {
 
 const heatmapBuilder = (data0, containerEl) => {
   // set the dimensions and margins of the graph
-  const margin = { top: 80, right: 25, bottom: 250, left: 250 },
+  const margin = { top: 80, right: 25, bottom: 100, left: 250 },
     width = 450 * 3 - margin.left - margin.right,
     height = 650 - margin.top - margin.bottom;
 
@@ -53,7 +53,7 @@ const heatmapBuilder = (data0, containerEl) => {
 
   // Append axis legend
   svg.append("g")
-    .style("font-size", 15)
+    .style("font-size", 12)
     .attr("transform", "translate(0," + height + ")")
     .attr("transform", "translate(0," + height + ")")
     .call(d3.axisBottom(x).tickSize(0))
@@ -70,7 +70,7 @@ const heatmapBuilder = (data0, containerEl) => {
 
   // Append axis legend
   svg.append("g")
-    .style("font-size", 15)
+    .style("font-size", 12)
     .call(d3.axisLeft(y).tickSize(0))
     .select(".domain").remove()
 
