@@ -13,9 +13,9 @@ const HeatMap = (props) => {
       if (children.size() !== 0) {
         d3.select(containerRef?.current).selectAll('svg').remove();
       }
-      drawChart(props.userData, containerRef.current);
+      drawChart(props.userData, containerRef.current, props.setFilteredData);
     }
-  }, [drawChart]);
+  }, [drawChart, props.setFilteredData, props.userData]);
 
   return <div ref={containerRef} />;
 }
