@@ -23,9 +23,10 @@ const formatData = (data0) => {
 
 const heatmapBuilder = (data0, containerEl, setFilteredData) => {
   // set the dimensions and margins of the graph
+
   const margin = { top: 80, right: 25, bottom: 100, left: 110 },
-    width = 450 * 3 - margin.left - margin.right,
-    height = 500 - margin.top - margin.bottom;
+    width = (window.screen.width * 0.8) - margin.left - margin.right,
+    height = width/2 - margin.top - margin.bottom;
 
   const selected = [];
   const data = formatData(data0);
@@ -60,7 +61,7 @@ const heatmapBuilder = (data0, containerEl, setFilteredData) => {
 
   //Rotate axis values
   svg.selectAll('text').attr('transform', 'rotate(-45)')
-  .attr("text-anchor", 'end')
+    .attr("text-anchor", 'end')
 
   // Build Y scales and axis:
   const y = d3.scaleBand()
@@ -89,7 +90,7 @@ const heatmapBuilder = (data0, containerEl, setFilteredData) => {
       '#DEEDCF'
     ];
 
-    return colorValues[colorValues.length - 1 -  value];
+    return colorValues[colorValues.length - 1 - value];
   }
 
   // Mouse interactions
