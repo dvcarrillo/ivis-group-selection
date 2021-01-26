@@ -5,7 +5,7 @@ import heatmapBuilder from './heatmapBuilder';
 const HeatMap = (props) => {
   const containerRef = useRef(null);
 
-  const drawChart = useCallback(heatmapBuilder,[]);
+  const drawChart = useCallback(heatmapBuilder, []);
 
   useLayoutEffect(() => {
     if (containerRef?.current) {
@@ -17,7 +17,19 @@ const HeatMap = (props) => {
     }
   }, [drawChart, props.setFilteredData, props.userData]);
 
-  return <div ref={containerRef} />;
+  return (
+    <>
+      <div className="keyBox">
+        <h5>Key</h5>
+        <div className="keyColor"></div>
+        <div className="keyLegend">
+          <p>Less skilled</p>
+          <p>More skilled</p>
+        </div>
+      </div>
+      <div ref={containerRef} />
+    </>
+  );
 }
 
 export default HeatMap;
