@@ -24,9 +24,9 @@ const formatData = (data0) => {
 const heatmapBuilder = (data0, containerEl, setFilteredData) => {
   // set the dimensions and margins of the graph
 
-  const margin = { top: 80, right: 25, bottom: 100, left: 110 },
+  const margin = { top: 0, right: 25, bottom: 100, left: 110 },
     width = (window.screen.width * 0.8) - margin.left - margin.right,
-    height = width/2 - margin.top - margin.bottom;
+    height = width / 2.5 - margin.top - margin.bottom;
 
   const selected = [];
   const data = formatData(data0);
@@ -77,17 +77,17 @@ const heatmapBuilder = (data0, containerEl, setFilteredData) => {
   // Build color scale
   const myColor = (value) => {
     let colorValues = [
-      '#0A2F51',
-      '#0E4D64',
-      '#137177',
-      '#188977',
-      '#1D9A6C',
-      '#39A96B',
-      '#56B870',
-      '#74C67A',
-      '#99D492',
-      '#BFE1B0',
-      '#DEEDCF'
+      '#004526',
+      '#006E3C',
+      '#008C51',
+      '#00A263',
+      '#00B072',
+      '#28C98C',
+      '#50DDA4',
+      '#78ECBB',
+      '#A0F7D1',
+      '#C8FEE5',
+      '#F0FFF8'
     ];
 
     return colorValues[colorValues.length - 1 - value];
@@ -95,26 +95,40 @@ const heatmapBuilder = (data0, containerEl, setFilteredData) => {
 
   // Mouse interactions
   const mouseover = function (d) {
-    svg.selectAll('rect').style('opacity', 0.3);
-    svg.selectAll(`.${rep(d.variable)}`).selectAll('rect').style('opacity', 0.55);
-    svg.selectAll(`.${rep(d.group)}`).selectAll('rect').style('opacity', 0.8);
-    svg.selectAll(`.${rep(d.group)}`).selectAll('text').style('opacity', 0.8);
+    svg.selectAll('rect').style('opacity', 0.25);
+    svg.selectAll(`.${rep(d.variable)}`).selectAll('rect').style('opacity', 0.4);
+    svg.selectAll(`.${rep(d.group)}`).selectAll('rect').style('opacity', 0.9);
+    svg.selectAll(`.${rep(d.group)}`).selectAll('text').style('opacity', 0.9);
     d3.select(this).style('opacity', 1);
+    selected.forEach(elem => {
+      d3.selectAll(`.${rep(elem)}`).selectAll('rect')
+      .style("opacity", 0.9);
+      d3.selectAll(`.${rep(elem)}`).selectAll('text')
+      .style("opacity", 1);
+    });
   }
 
   const mouseleave = function (d) {
-    svg.selectAll('rect').style('opacity', 0.8);
+    svg.selectAll('rect').style('opacity', selected.length < 1 ? 1 : 0.25);
     svg.selectAll(`.${rep(d.group)}`).selectAll('text').style('opacity', 0);
-    d3.select(this).style("opacity", 0.8);
+    d3.select(this).style("opacity", 1);
+    selected.forEach(elem => {
+      d3.selectAll(`.${rep(elem)}`).selectAll('rect')
+      .style("opacity", 0.9);
+      d3.selectAll(`.${rep(elem)}`).selectAll('text')
+      .style("opacity", 1);
+    });
   }
 
   const click = function (d) {
-    const idx = selected.indexOf(d);
-    const isSelected = idx > -1;
-    isSelected ? selected.splice(idx) : selected.push(d);
-    d3.selectAll(`.${rep(d.variable)}`).filter(`.${rep(d.group)}`).select('rect')
-      .style("stroke", isSelected ? "none" : "black");
-    const data = selected.map(x => data0.find(data => data.User === x.group));
+    const selectedName = d.group;
+    const selectedNameIdx = selected.indexOf(selectedName);
+    const isSelected = selectedNameIdx > -1;
+    isSelected ? selected.splice(selectedNameIdx, 1) : selected.push(selectedName);
+
+    d3.selectAll(`.${rep(d.group)}`).selectAll('rect')
+      .style("opacity", isSelected ? 0.25 : 0.9);
+    const data = selected.map(x => data0.find(data => data.User === x));
     setFilteredData(data.length > 0 ? data : data0);
   }
 
@@ -137,7 +151,7 @@ const heatmapBuilder = (data0, containerEl, setFilteredData) => {
     .style("fill", function (d) { return myColor(d.value) })
     .style("stroke-width", 4)
     .style("stroke", "none")
-    .style("opacity", 0.8);
+    .style("opacity", 1);
 
   // Append the legend
   cells.append("text")
@@ -149,25 +163,6 @@ const heatmapBuilder = (data0, containerEl, setFilteredData) => {
     .style("font-size", "20px")
     .style('fill', 'white')
     .text(function (d) { return d.value; });
-
-  // Add title to graph
-  svg.append("text")
-    .attr("x", 0)
-    .attr("y", -50)
-    .attr("text-anchor", "left")
-    .style("font-size", "22px")
-    .style("fill", "white")
-    .text("IVIS group formation tool");
-
-  // Add subtitle to graph
-  svg.append("text")
-    .attr("x", 0)
-    .attr("y", -20)
-    .attr("text-anchor", "left")
-    .style("font-size", "14px")
-    .style("fill", "white")
-    .style("max-width", 400)
-    .text("A D3 graph for group formation");
 };
 
 

@@ -17,14 +17,24 @@ const HeatMap = (props) => {
     }
   }, [drawChart, props.setFilteredData, props.userData]);
 
+
+  // Student's skills
+  // Hover over the cells to see the specific skills of the student. Select one cell to add the student to the group list.
+
   return (
     <>
-      <div className="keyBox">
-        <h5>Key</h5>
-        <div className="keyColor"></div>
-        <div className="keyLegend">
-          <p>Less skilled</p>
-          <p>More skilled</p>
+      <div class="heatmapHead">
+        <div class="titleBox">
+          <h1>Student's skills</h1>
+          <h3>Hover over the cells to see the specific skills of the student. Select one cell to add the student to the group list.</h3>
+        </div>
+        <div className="keyBox">
+          <h5>Key</h5>
+          <div className="keyColor"></div>
+          <div className="keyLegend">
+            <p>Less skilled</p>
+            <p>More skilled</p>
+          </div>
         </div>
       </div>
       <div ref={containerRef} />

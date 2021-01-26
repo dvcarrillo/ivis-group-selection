@@ -42,14 +42,32 @@
   padding: 30px 50px;
 }
 
+.heatmapHead {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin: 20px 0 20px 0;
+}
+
+.titleBox {
+  font-size: 0.8rem;
+  text-align: left;
+}
+
+.titleBox h1, h3 {
+  margin: 7px;
+}
+
+.titleBox h3 {
+  font-weight: 400;
+}
+
 .keyBox {
-  position: absolute;
-  top: 180px;
-  left: 72%;
   width: 200px;
   background-color: #21242c;
   border-radius: 5px;
   padding: 10px 20px;
+  margin-left: 80px;
 }
 
 .keyLegend {
@@ -67,6 +85,7 @@
 
 .keyBox h5 {
   width: 100%;
+  font-size: 1rem;
   margin: 0;
   text-align: left;
 }
