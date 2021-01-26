@@ -92,7 +92,7 @@ const heatmapBuilder = (data0, containerEl, setFilteredData) => {
     return colorValues[colorValues.length - 1 -  value];
   }
 
-  // Three function that change the tooltip when user hover / move / leave a cell
+  // Mouse interactions
   const mouseover = function (d) {
     svg.selectAll('rect').style('opacity', 0.3);
     svg.selectAll(`.${rep(d.variable)}`).selectAll('rect').style('opacity', 0.55);
@@ -100,7 +100,6 @@ const heatmapBuilder = (data0, containerEl, setFilteredData) => {
     svg.selectAll(`.${rep(d.group)}`).selectAll('text').style('opacity', 0.8);
     d3.select(this).style('opacity', 1);
   }
-  const mousemove = function (d) {}
 
   const mouseleave = function (d) {
     svg.selectAll('rect').style('opacity', 0.8);
@@ -118,7 +117,7 @@ const heatmapBuilder = (data0, containerEl, setFilteredData) => {
     setFilteredData(data.length > 0 ? data : data0);
   }
 
-  // add the squares
+  // Add the squares
   const cells = svg.selectAll()
     .data(data, function (d) { return d.group + ':' + d.variable; })
     .enter()
@@ -126,15 +125,12 @@ const heatmapBuilder = (data0, containerEl, setFilteredData) => {
     .attr('class', (d) => `${rep(d.variable)} ${rep(d.group)}`)
     .on("click", click)
     .on("mouseover", mouseover)
-    .on("mousemove", mousemove)
     .on("mouseleave", mouseleave);
 
-  // append the square
+  // Append the square
   cells.append("rect")
     .attr("x", function (d) { return x(d.group) })
     .attr("y", function (d) { return y(d.variable) })
-    // .attr("rx", 4)
-    // .attr("ry", 4)
     .attr("width", x.bandwidth())
     .attr("height", y.bandwidth())
     .style("fill", function (d) { return myColor(d.value) })
@@ -142,7 +138,7 @@ const heatmapBuilder = (data0, containerEl, setFilteredData) => {
     .style("stroke", "none")
     .style("opacity", 0.8);
 
-  // append the legend
+  // Append the legend
   cells.append("text")
     .attr("x", function (d) { return x(d.group) + x.bandwidth() / 2; })
     .attr("y", function (d) { return y(d.variable) + y.bandwidth() / 2; })
